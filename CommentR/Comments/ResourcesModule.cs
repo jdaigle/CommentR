@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using Nancy;
 
@@ -17,7 +18,7 @@ namespace CommentR.Comments
             {
                 return new Response()
                 {
-                    Contents = x => RenderJavascript(x, rootPath),
+                    Contents = x => RenderJavascript(x, rootPath, this.Context),
                     ContentType = "application/javascript",
                 };
             };
@@ -32,8 +33,20 @@ namespace CommentR.Comments
             };
         }
 
-        public static void RenderJavascript(Stream responseStream, IRootPathProvider rootPath)
+        public static void RenderJavascript(Stream responseStream, IRootPathProvider rootPath, NancyContext context)
         {
+            var jsConfigSection = @"
+window.commentr = {
+    config: {
+        stylesheetURL: '" + context.Request.Url.SiteBase + @"/css',
+        loadCommentsURL: '" + context.Request.Url.SiteBase + @"/comments',
+        submitCommentURL: '" + context.Request.Url.SiteBase + @"/comment'
+    }
+};
+";
+            var writer = new StreamWriter(responseStream, Encoding.UTF8);
+            writer.Write(jsConfigSection);
+            writer.Flush();
             using (var js = new FileStream(Path.Combine(rootPath.GetRootPath(), "content/blog.js"), FileMode.Open))
             {
                 js.CopyTo(responseStream);

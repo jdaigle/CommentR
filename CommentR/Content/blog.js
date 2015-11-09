@@ -1,13 +1,5 @@
 ﻿// requires jquery
 
-window.commentr = {
-    config: {
-        stylesheetURL: '/css',
-        loadCommentsURL: '/comments',
-        submitCommentURL: '/comment'
-    }
-},
-
 $(function () {
     var placeholderElement = $($("[data-commentr-placeholder]")[0]);
     var permalink = $(placeholderElement).data('commentr-permalink');
