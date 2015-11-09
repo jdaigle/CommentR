@@ -1,0 +1,29 @@
+﻿.commentr .error {
+    color: red;
+}
+
+.commentr .comment {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #eeeeee;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.commentr .author {
+    font-weight: bold;
+}
+
+.commentr .timestamp {
+    font-style: italic;
+    font-size: .9em;
+}
+
+.commentr form input:not([type=hidden]),
+.commentr form label,
+.commentr form textarea,
+.commentr form button {
+    display: block;
+    margin-top: 5px;
+}

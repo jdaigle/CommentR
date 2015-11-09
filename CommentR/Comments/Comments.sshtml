@@ -1,0 +1,21 @@
+﻿<p>
+    There are <strong>@Model.Count</strong> comments.
+</p>
+@Each.Comments
+    <div class="comment">
+        <span class="author">@Current.Author</span> - <span class="timestamp" data-commentr-datetime="@Current.DateTimeUTCISOString">@Current.DateTimeUTCISOString (UTC)</span>
+        <p>
+          @Current.MarkdownProcessedBody
+        </p>
+    </div>
+@EndEach
+<div>
+    <form id="commentr-submit-form">
+        <input type="hidden" name="permalink" value="@Model.Permalink" />
+        <label>Author</label>
+        <input type="text" name="author" />
+        <label>Body</label>
+        <textarea name="body" rows="5" cols="80"></textarea>
+        <button type="submit">Submit Comment</button>
+    </form>
+</div>
