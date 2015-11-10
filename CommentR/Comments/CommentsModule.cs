@@ -147,7 +147,7 @@ VALUES
             {
                 Permalink = permalink,
                 Count = comments.Count,
-                Comments = comments.OrderByDescending(x => x.DateTimeUTC).ToArray(),
+                Comments = comments.OrderBy(x => x.DateTimeUTC).ToArray(),
             };
         }
     }
