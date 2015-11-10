@@ -1,6 +1,8 @@
-﻿
+﻿window.parent.postMessage(["setHeight", 50], "*");
+
 function resize() {
-    var height = document.getElementsByTagName("html")[0].scrollHeight;
+    var height = document.body.scrollHeight;
+    console.log(height);
     window.parent.postMessage(["setHeight", height], "*");
 }
 
@@ -19,18 +21,19 @@ $(function () {
         resize();
     };
 
-    // load the comments
-    $.ajax({
-        dataType: "html",
-        url: "/comments",
-        data: { permalink: window.commentr.config.permalink },
-        success: handleLoadedComments
-    }).fail(function () {
-        placeholderElement.empty();
-        placeholderElement.find('.error').remove();
-        placeholderElement.html('<span class="error">Error Loading Comments</span>');
-        resize();
-    });
+    var loadComments = function () {
+        $.ajax({
+            dataType: "html",
+            url: "/comments",
+            data: { permalink: window.commentr.config.permalink },
+            success: handleLoadedComments
+        }).fail(function () {
+            placeholderElement.empty();
+            placeholderElement.find('.error').remove();
+            placeholderElement.html('<span class="error">Error Loading Comments</span>');
+            resize();
+        });
+    };
 
     // handle new comment
     $(placeholderElement).on('submit', '#commentr-submit-form', function (e) {
@@ -48,4 +51,6 @@ $(function () {
             resize();
         });
     });
+
+    loadComments();
 });
