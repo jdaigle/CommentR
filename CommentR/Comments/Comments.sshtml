@@ -15,7 +15,7 @@
         <label>Author</label>
         <input type="text" name="author" />
         <label>Body</label>
-        <textarea name="body" rows="5" cols="80"></textarea>
+        <textarea name="body" rows="5"></textarea>
         <button type="submit">Submit Comment</button>
     </form>
 </div>

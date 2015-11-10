@@ -25,10 +25,21 @@
     font-size: .9em;
 }
 
+.commentr form {
+    padding: 5px;
+}
+
 .commentr form input:not([type=hidden]),
 .commentr form label,
 .commentr form textarea,
 .commentr form button {
     display: block;
     margin-top: 5px;
+}
+
+
+.commentr form input:not([type=hidden]),
+.commentr form label,
+.commentr form textarea {
+    width: 100%;
 }
