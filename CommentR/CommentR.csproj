@@ -79,16 +79,19 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Comments\Frame.sshtml" />
+    <Content Include="Content\external.js" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\blog.css" />
-    <Content Include="Content\blog.js" />
+    <Content Include="Content\internal.css" />
+    <Content Include="Content\internal.js" />
     <Content Include="Test\BlogIntegrationTest2.html" />
     <Content Include="Test\BlogIntegrationTest.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comments\FrameModel.cs" />
     <Compile Include="Markdown.cs" />
     <Compile Include="NancyBootstrapper.cs" />
     <Compile Include="SqlMapper.cs" />

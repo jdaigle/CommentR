@@ -1,35 +1,36 @@
-﻿// requires jquery
+﻿
+function resize() {
+    var height = document.getElementsByTagName("html")[0].scrollHeight;
+    window.parent.postMessage(["setHeight", height], "*");
+}
 
+// requires jquery
 $(function () {
-    var placeholderElement = $($("[data-commentr-placeholder]")[0]);
-    var permalink = $(placeholderElement).data('commentr-permalink');
-
+    var placeholderElement = $("#comments-placeholder");
     placeholderElement.addClass("commentr");
 
-    var newSS = document.createElement('link');
-    newSS.rel = 'stylesheet';
-    newSS.href = window.commentr.config.stylesheetURL;
-    document.getElementsByTagName("head")[0].appendChild(newSS);
-
     var handleLoadedComments = function (html) {
+        console.log("handleLoadedComments")
         placeholderElement.empty();
         placeholderElement.append(html);
         $("[data-commentr-datetime]").each(function (i, el) {
             var dt = new Date($(el).data("commentr-datetime"));
             $(el).html(dt.toLocaleString());
         });
+        resize();
     };
 
     // load the comments
     $.ajax({
         dataType: "html",
-        url: window.commentr.config.loadCommentsURL,
-        data: { permalink: permalink },
+        url: "/comments",
+        data: { permalink: window.commentr.config.permalink },
         success: handleLoadedComments
     }).fail(function () {
         placeholderElement.empty();
         placeholderElement.find('.error').remove();
         placeholderElement.html('<span class="error">Error Loading Comments</span>');
+        resize();
     });
 
     // handle new comment
@@ -39,12 +40,13 @@ $(function () {
         $.ajax({
             type: "POST",
             dataType: "html",
-            url: window.commentr.config.submitCommentURL,
+            url: "/comment",
             data: formData,
             success: handleLoadedComments
         }).fail(function () {
             placeholderElement.find('.error').remove();
             placeholderElement.append('<span class="error">Error Submitting Comment ' + new Date().getTime() + '</span>');
+            resize();
         });
     });
 });

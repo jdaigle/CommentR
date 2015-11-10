@@ -24,6 +24,19 @@ namespace CommentR.Comments
 
         public CommentsModule()
         {
+            Get["/frame"] = _ =>
+            {
+                var permalink = (string)this.Request.Query.Permalink;
+                if (string.IsNullOrWhiteSpace(permalink))
+                {
+                    return "'permalink' is a required query string parameter";
+                }
+                return new FrameModel
+                {
+                    Permalink = permalink,
+                };
+            };
+
             Get["/comments"] = _ =>
             {
                 var permalink = (string)this.Request.Query.Permalink;

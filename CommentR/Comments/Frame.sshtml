@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/Content/internal.css">
+</head>
+<body>
+    <div id="comments-placeholder" class="commentr"></div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        window.commentr = {
+            config: {
+                permalink: '@Model.Permalink'
+            }
+        };
+    </script>
+    <script src="/Content/internal.js"></script>
+</body>
+</html>
