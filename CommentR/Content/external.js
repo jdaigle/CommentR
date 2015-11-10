@@ -13,6 +13,8 @@ window.addEventListener('message', function (e) {
     }
 }, false);
 _commentsFrame.style.width = "100%";
-_commentsFrame.style.border = "none";
+_commentsFrame.style.border = "1px dashed #aaa";
 _commentsFrame.style.overflow = "hidden";
-_commentsFrame.src = "/frame?permalink=" + permalinkEncoded;
+
+var baseURL = document.getElementById("comments-script").src.replace("/js", "/frame?permalink=")
+_commentsFrame.src = baseURL + permalinkEncoded;

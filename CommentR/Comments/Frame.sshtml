@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/Content/internal.css">
 </head>
 <body>
-    <div id="comments-placeholder" class="commentr"></div>
+    <div id="comments-placeholder" class="commentr">Loading Comments...</div>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>
         window.commentr = {

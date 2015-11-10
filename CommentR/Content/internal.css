@@ -1,11 +1,16 @@
-﻿.commentr .error {
+﻿body {
+    font-size: 16px;
+    color: #444;
+}
+
+.commentr .error {
     color: red;
 }
 
 .commentr .comment {
     margin-top: 10px;
     padding: 10px;
-    background-color: #eeeeee;
+    background-color: #f7f7f7;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
