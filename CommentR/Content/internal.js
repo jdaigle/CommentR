@@ -10,7 +10,6 @@ $(function () {
     placeholderElement.addClass("commentr");
 
     var handleLoadedComments = function (html) {
-        console.log("handleLoadedComments")
         placeholderElement.empty();
         placeholderElement.append(html);
         $("[data-commentr-datetime]").each(function (i, el) {
