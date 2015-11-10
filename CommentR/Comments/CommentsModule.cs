@@ -138,7 +138,7 @@ VALUES
             {
                 s.Open();
                 comments = s.Query<CommentModel>(
-                        "SELECT * FROM dbo.Comment WHERE PagePermalink = @PagePermalink",
+                        "SELECT * FROM dbo.Comment WHERE PagePermalink = @PagePermalink AND IsHidden = 0;",
                         param: new { PagePermalink = permalink, })
                     .ToList();
             }
