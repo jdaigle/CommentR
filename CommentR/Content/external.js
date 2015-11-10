@@ -1,5 +1,7 @@
 ﻿var _commentsFrame = window.document.getElementById("comments-frame");
 
+_commentsFrame.style.display = "none";
+
 var permalink = _commentsFrame.getAttribute("data-commentr-permalink");
 var permalinkEncoded = encodeURIComponent(permalink);
 
@@ -8,6 +10,7 @@ window.addEventListener('message', function (e) {
     var data = e.data[1];
     switch (eventName) {
         case 'setHeight':
+            _commentsFrame.style.display = null;
             _commentsFrame.height = data + "px";
             break;
     }
