@@ -10,7 +10,7 @@ window.addEventListener('message', function (e) {
     var data = e.data[1];
     switch (eventName) {
         case 'setHeight':
-            _commentsFrame.style.display = null;
+            _commentsFrame.style.display = "";
             _commentsFrame.height = data + "px";
             break;
     }
