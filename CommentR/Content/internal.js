@@ -1,7 +1,7 @@
 ﻿window.parent.postMessage(["setHeight", 50], "*");
 
 function resize() {
-    var height = document.body.scrollHeight;
+    var height = document.body.offsetHeight + 30;
     console.log(height);
     window.parent.postMessage(["setHeight", height], "*");
 }
@@ -18,7 +18,7 @@ $(function () {
             var dt = new Date($(el).data("commentr-datetime"));
             $(el).html(dt.toLocaleString());
         });
-        resize();
+        setTimeout(resize, 100);
     };
 
     var loadComments = function () {
@@ -31,7 +31,7 @@ $(function () {
             placeholderElement.empty();
             placeholderElement.find('.error').remove();
             placeholderElement.html('<span class="error">Error Loading Comments</span>');
-            resize();
+            setTimeout(resize, 100);
         });
     };
 
@@ -48,7 +48,7 @@ $(function () {
         }).fail(function () {
             placeholderElement.find('.error').remove();
             placeholderElement.append('<span class="error">Error Submitting Comment ' + new Date().getTime() + '</span>');
-            resize();
+            setTimeout(resize, 100);
         });
     });
 
