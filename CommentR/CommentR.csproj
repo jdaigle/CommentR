@@ -91,6 +91,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminModule.cs" />
+    <Compile Include="Admin\CommentsModel.cs" />
     <Compile Include="Comments\FrameModel.cs" />
     <Compile Include="HTTPReferrerValidation.cs" />
     <Compile Include="Markdown.cs" />
@@ -106,6 +108,7 @@
     <Content Include="Comments\Comments.sshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Comments.sshtml" />
     <None Include="Properties\PublishProfiles\commentr.pubxml" />
   </ItemGroup>
   <PropertyGroup>

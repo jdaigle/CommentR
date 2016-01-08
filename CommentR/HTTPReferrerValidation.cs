@@ -6,7 +6,7 @@ using Nancy.Bootstrapper;
 
 namespace CommentR
 {
-    public class HTTPReferrerValidation : IApplicationStartup
+    public class HTTPReferrerValidation
     {
         static List<string> referrerHostWhitelist = new List<string>()
             {
@@ -15,21 +15,18 @@ namespace CommentR
                 "commentr.azurewebsites.net",
             };
 
-        public void Initialize(IPipelines pipelines)
+        public static Response ValidateRequest(NancyContext ctx)
         {
-            pipelines.BeforeRequest += (NancyContext ctx) =>
+            if (string.IsNullOrWhiteSpace(ctx.Request.Headers.Referrer))
             {
-                if (string.IsNullOrWhiteSpace(ctx.Request.Headers.Referrer))
-                {
-                    return "Invalid Referrer";
-                }
-                var referrer = new Url(ctx.Request.Headers.Referrer);
-                if (!referrerHostWhitelist.Any(x => string.Equals(x, referrer.HostName, System.StringComparison.InvariantCultureIgnoreCase)))
-                {
-                    return "Invalid Referrer";
-                }
-                return null;
-            };
+                return "Invalid Referrer";
+            }
+            var referrer = new Url(ctx.Request.Headers.Referrer);
+            if (!referrerHostWhitelist.Any(x => string.Equals(x, referrer.HostName, System.StringComparison.InvariantCultureIgnoreCase)))
+            {
+                return "Invalid Referrer";
+            }
+            return null;
         }
     }
 }

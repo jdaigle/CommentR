@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Comments - All</title>
+    <link rel="stylesheet" href="/Content/internal.css">
+</head>
+<body>
+    <div id="comments-placeholder" class="commentr">
+        <p>
+            There are <strong>@Model.Count</strong> comments.
+        </p>
+        @Each.Comments
+        <div class="comment">
+            <span class="author">@Current.Author</span> - <span class="timestamp" data-commentr-datetime="@Current.DateTimeUTCISOString">@Current.DateTimeUTCISOString (UTC)</span>
+            <span><a href="@Current.PagePermalink">@Current.PagePermalink</a></span>
+            <p>
+                @Current.MarkdownProcessedBody
+            </p>
+        </div>
+        @EndEach
+    </div>
+</body>
+</html>

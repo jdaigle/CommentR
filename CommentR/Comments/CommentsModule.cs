@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.IO;
+using System.Linq;
+using Dapper;
 using HtmlAgilityPack;
 using Nancy;
-using Nancy.Extensions;
-using Dapper;
 
 namespace CommentR.Comments
 {
@@ -24,6 +22,8 @@ namespace CommentR.Comments
 
         public CommentsModule()
         {
+            Before += HTTPReferrerValidation.ValidateRequest;
+
             Get["/frame"] = _ =>
             {
                 var permalink = (string)this.Request.Query.Permalink;

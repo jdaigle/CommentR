@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace CommentR.Comments
+namespace CommentR.Admin
 {
     public class CommentsModel
     {
