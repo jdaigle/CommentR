@@ -47,7 +47,7 @@ namespace CommentR.Admin
 
                 body = Util.SanitizeBody(body);
 
-                var comment = new CommentModel()
+                var comment = new Comments.CommentModel()
                 {
                     PagePermalink = permalink,
                     DateTimeUTC = DateTime.UtcNow,
@@ -66,18 +66,22 @@ namespace CommentR.Admin
 
         private object CreateCommentsModel(NancyContext context)
         {
-            List<CommentModel> comments = null;
+            List<Comments.CommentModel> comments = null;
             using (var s = new SqlConnection(connectionString))
             {
                 s.Open();
-                comments = s.Query<CommentModel>("SELECT * FROM dbo.Comment WHERE IsHidden = 0;").ToList();
+                comments = s
+                    .Query<Comments.CommentModel>("SELECT * FROM dbo.Comment WHERE IsHidden = 0;")
+                    .ToList();
             }
+
+            Util.OrderComments(comments);
 
             return new CommentsModel
             {
                 Permalink = "",
                 Count = comments.Count,
-                Comments = comments.OrderByDescending(x => x.PagePermalink).ThenBy(x => x.DateTimeUTC).ToArray(),
+                Comments = comments.ToArray(),
             };
         }
     }

@@ -96,11 +96,13 @@ namespace CommentR.Comments
                     .ToList();
             }
 
+            Util.OrderComments(comments);
+
             return new CommentsModel
             {
                 Permalink = permalink,
                 Count = comments.Count,
-                Comments = comments.OrderBy(x => x.DateTimeUTC).ToArray(),
+                Comments = comments.ToArray(),
             };
         }
     }

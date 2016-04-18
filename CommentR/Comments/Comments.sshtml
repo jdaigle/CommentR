@@ -2,7 +2,7 @@
     There are <strong>@Model.Count</strong> comments.
 </p>
 @Each.Comments
-    <div class="comment">
+    <div class="comment @Current.ModClass @Current.ReplyClass">
         <span class="author">@Current.Author</span> - <span class="timestamp" data-commentr-datetime="@Current.DateTimeUTCISOString">@Current.DateTimeUTCISOString (UTC)</span>
         <p>
           @Current.MarkdownProcessedBody

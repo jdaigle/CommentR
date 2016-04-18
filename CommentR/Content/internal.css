@@ -16,9 +16,18 @@
     border-radius: 5px;
 }
 
-.commentr .author {
-    font-weight: bold;
-}
+    .commentr .comment.comment-reply {
+        margin-left: 15px;
+    }
+
+    .commentr .comment.comment-mod .author {
+        font-weight: bold;
+        color: red;
+    }
+
+        .commentr .comment.comment-mod .author:after {
+            content: " (mod)";
+        }
 
 .commentr .timestamp {
     font-style: italic;
@@ -29,17 +38,17 @@
     padding: 5px;
 }
 
-.commentr form input:not([type=hidden]),
-.commentr form label,
-.commentr form textarea,
-.commentr form button {
-    display: block;
-    margin-top: 5px;
-}
+    .commentr form input:not([type=hidden]),
+    .commentr form label,
+    .commentr form textarea,
+    .commentr form button {
+        display: block;
+        margin-top: 5px;
+    }
 
 
-.commentr form input:not([type=hidden]),
-.commentr form label,
-.commentr form textarea {
-    width: 100%;
-}
+    .commentr form input:not([type=hidden]),
+    .commentr form label,
+    .commentr form textarea {
+        width: 100%;
+    }

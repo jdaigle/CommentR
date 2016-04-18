@@ -1,4 +1,7 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using Dapper;
 using HtmlAgilityPack;
@@ -71,6 +74,27 @@ VALUES
 ";
                 s.Execute(insertSQL, comment);
             }
+        }
+
+        public static void OrderComments(List<Comments.CommentModel> comments)
+        {
+            var copy = new List<Comments.CommentModel>(comments.OrderByDescending(x => x.PagePermalink).ThenBy(x => x.DateTimeUTC));
+            var newList = new List<Comments.CommentModel>(copy.Count);
+            while (copy.Count > 0)
+            {
+                var comment = copy[0];
+                copy.RemoveAt(0);
+                newList.Add(comment);
+                // find replies
+                var replies = copy.Where(x => x.ReplyTo == comment.CommentID).ToList();
+                foreach (var reply in replies)
+                {
+                    copy.Remove(reply);
+                    newList.Add(reply);
+                }
+            }
+            comments.Clear();
+            comments.AddRange(newList);
         }
     }
 }

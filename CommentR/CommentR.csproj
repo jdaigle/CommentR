@@ -94,6 +94,7 @@
     <Compile Include="Admin\AdminModule.cs" />
     <Compile Include="Admin\CommentReplyModel.cs" />
     <Compile Include="Admin\CommentsModel.cs" />
+    <Compile Include="Comments\CommentModel.cs" />
     <Compile Include="Comments\FrameModel.cs" />
     <Compile Include="HTTPReferrerValidation.cs" />
     <Compile Include="Markdown.cs" />
