@@ -81,7 +81,7 @@
   <ItemGroup>
     <Content Include="Comments\Frame.sshtml" />
     <Content Include="Content\external.js" />
-    <Content Include="packages.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\internal.css" />
