@@ -11,13 +11,11 @@ namespace CommentR.Comments
 {
     public class CommentsModule : NancyModule
     {
-        private static MarkdownSharp.Markdown markdown;
         private static string connectionString;
 
         static CommentsModule()
         {
             connectionString = ConfigurationManager.ConnectionStrings["CommentR"].ConnectionString;
-            markdown = new MarkdownSharp.Markdown();
         }
 
         public CommentsModule()
@@ -68,67 +66,22 @@ namespace CommentR.Comments
                     throw new InvalidOperationException("'body' is a required parameter");
                 }
 
-                body = SanitizeBody(body);
+                body = Util.SanitizeBody(body);
 
                 var comment = new CommentModel()
                 {
                     PagePermalink = permalink,
                     DateTimeUTC = DateTime.UtcNow,
                     Author = author,
-                    Body = SanitizeBody(body),
+                    Body = body,
                     IsHidden = false,
                     AuthorIsModerator = false,
                 };
 
-                using (var s = new SqlConnection(connectionString))
-                {
-                    s.Open();
-                    var insertSQL = @"
-INSERT INTO dbo.Comment
-([PagePermalink]
-,[DateTimeUTC]
-,[Author]
-,[Body]
-,[IsHidden]
-,[AuthorIsModerator])
-VALUES
-(@PagePermalink
-,@DateTimeUTC
-,@Author
-,@Body
-,@IsHidden
-,@AuthorIsModerator);
-";
-                    s.Execute(insertSQL, comment);
-                }
+                Util.InsertComment(comment);
 
                 return CreateCommentsModel(this.Context, permalink);
             };
-        }
-
-        private string SanitizeBody(string body)
-        {
-            var html = new HtmlDocument();
-            html.LoadHtml(body);
-            SanitizeNode(html.DocumentNode);
-            return html.DocumentNode.WriteTo();
-        }
-
-        private void SanitizeNode(HtmlNode node)
-        {
-            if (node.NodeType == HtmlNodeType.Element)
-            {
-                // TODO: whitelist?
-                node.Remove();
-                return;
-            }
-            if (node.HasChildNodes)
-            {
-                for (int i = node.ChildNodes.Count - 1; i >= 0; i--)
-                {
-                    SanitizeNode(node.ChildNodes[i]);
-                }
-            }
         }
 
         private object CreateCommentsModel(NancyContext context, string permalink)

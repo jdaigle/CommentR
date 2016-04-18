@@ -16,6 +16,11 @@
             <p>
                 @Current.MarkdownProcessedBody
             </p>
+            @If.ShowReplyButton
+            <p>
+                <a href="/comment/@Current.CommentID/reply">Reply</a>
+            </p>
+            @EndIf
         </div>
         @EndEach
     </div>

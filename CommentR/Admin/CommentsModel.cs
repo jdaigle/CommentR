@@ -14,13 +14,6 @@ namespace CommentR.Admin
 
     public class CommentModel
     {
-        private static MarkdownSharp.Markdown markdown;
-
-        static CommentModel()
-        {
-            markdown = new MarkdownSharp.Markdown();
-        }
-
         public long CommentID { get; set; }
         public string PagePermalink { get; set; }
         public DateTime DateTimeUTC { get; set; }
@@ -28,6 +21,8 @@ namespace CommentR.Admin
         public string Body { get; set; }
         public bool IsHidden { get; set; }
         public bool AuthorIsModerator { get; set; }
+
+        public int? ReplyTo { get; set; }
 
         public string DateTimeUTCISOString
         {
@@ -41,8 +36,17 @@ namespace CommentR.Admin
         {
             get
             {
-                return markdown.Transform(Body);
+                return Util.TransformMarkdown(Body);
             }
         }
+
+        public bool ShowReplyButton
+        {
+            get
+            {
+                return !AuthorIsModerator;
+            }
+        }
+
     }
 }

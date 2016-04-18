@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Comments - All</title>
+    <link rel="stylesheet" href="/Content/internal.css">
+</head>
+<body>
+    <div class="commentr">
+        <div class="comment">
+            <span class="author">@Model.Author</span> - <span class="timestamp" data-commentr-datetime="@Model.DateTimeUTCISOString">@Model.DateTimeUTCISOString (UTC)</span>
+            <span><a href="@Model.PagePermalink">@Model.PagePermalink</a></span>
+            <p>
+                @Model.MarkdownProcessedBody
+            </p>
+        </div>
+        <div>
+        <form method="post" action="/comment/@Model.CommentID/reply">
+            <input type="hidden" name="permalink" value="@Model.PagePermalink" />
+            <input type="hidden" name="isMod" value="true" />
+            <label>Author</label>
+            <input type="text" name="author" value="Joseph Daigle" />
+            <label>Body</label>
+            <textarea name="body" rows="5"></textarea>
+            <button type="submit">Submit Mod Comment</button>
+        </form>
+    </div>
+</body>
+</html>
